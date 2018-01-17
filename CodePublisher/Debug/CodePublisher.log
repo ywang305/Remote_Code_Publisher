@@ -1,0 +1,18 @@
+﻿  PubList.cpp
+  DemoExecutive.cpp
+  AnalyzerExec.cpp
+  CodePub.cpp
+  Utilities.cpp
+  Tokenizer.cpp
+  SemiExp.cpp
+  Parser.cpp
+  ConfigureParser.cpp
+  ActionsAndRules.cpp
+  Logger.cpp
+  GrammarHelpers.cpp
+  FileSystem.cpp
+  FileMgr.cpp
+  AbstrSynTree.cpp
+  Generating Code...
+  CodePublisher.vcxproj -> D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\Debug\CodePublisher.exe
+  CodePublisher.vcxproj -> D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\Debug\CodePublisher.pdb (Full PDB)

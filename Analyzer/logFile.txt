@@ -1,0 +1,17 @@
+
+                                             CodeAnalysis
+    ==============================================================================================
+     Sun Mar  5 00:41:30 2017
+     Path: "D:\Syracuse\cse687 OOD\pro2\DepAnal_on_CodeAnalyzer\Analyzer"
+     Args: *.h, *.cpp, /f, /r
+                                                                               
+                          Functions Exceeding Metric Limits and Public Data
+    ==============================================================================================
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+             Executive.cpp    function                  processSourceCode     366      95       8
+
+
+
+    searched     6 dirs
+   processed     2 files

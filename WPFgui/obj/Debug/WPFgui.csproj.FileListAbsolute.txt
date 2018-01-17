@@ -1,0 +1,96 @@
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe.config
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.pdb
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.dll
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.pdb
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csprojResolveAssemblyReference.cache
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.g.cs
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\App.g.cs
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.cache
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.lref
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.baml
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.g.resources
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.Properties.Resources.resources
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csproj.GenerateResource.Cache
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.exe
+D:\Syracuse\cse687 OOD\pro4\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.pdb
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe.config
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.pdb
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.dll
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.pdb
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csprojResolveAssemblyReference.cache
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.g.cs
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\App.g.cs
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.cache
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.lref
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.baml
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.g.resources
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.Properties.Resources.resources
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csproj.GenerateResource.Cache
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.exe
+C:\Users\wyaod\Desktop\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.pdb
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe.config
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.pdb
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.dll
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.pdb
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csprojResolveAssemblyReference.cache
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.g.cs
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\App.g.cs
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.cache
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.lref
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.baml
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.g.resources
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.Properties.Resources.resources
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csproj.GenerateResource.Cache
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.exe
+C:\Users\wyaod\Desktop\test\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.pdb
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe.config
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.pdb
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.dll
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.pdb
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csprojResolveAssemblyReference.cache
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.g.cs
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\App.g.cs
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.cache
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.lref
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.baml
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.g.resources
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.Properties.Resources.resources
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csproj.GenerateResource.Cache
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.exe
+C:\Users\wyaod\Desktop\demo\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.pdb
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe.config
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.pdb
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.dll
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.pdb
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csprojResolveAssemblyReference.cache
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.g.cs
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\App.g.cs
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.cache
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.lref
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.baml
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.g.resources
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.Properties.Resources.resources
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csproj.GenerateResource.Cache
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.exe
+C:\Users\wyaod\Desktop\demo2\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.pdb
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe.config
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.exe
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\bin\Debug\WPFgui.pdb
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.dll
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\bin\Debug\CLIShim.pdb
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csprojResolveAssemblyReference.cache
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.g.cs
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\App.g.cs
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.cache
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui_MarkupCompile.lref
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\MainWindow.baml
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.g.resources
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.Properties.Resources.resources
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.csproj.GenerateResource.Cache
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.exe
+D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\WPFgui\obj\Debug\WPFgui.pdb

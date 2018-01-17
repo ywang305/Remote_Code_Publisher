@@ -1,0 +1,16 @@
+
+                                             CodeAnalysis
+    ==============================================================================================
+     Fri Mar  3 22:06:35 2017
+     Path: "D:\Syracuse\cse687 OOD\pro2\DepAnal_on_CodeAnalyzer\Utilities"
+     Args: *.h, *.cpp, /f, /r
+                                                                               
+                          Functions Exceeding Metric Limits and Public Data
+    ==============================================================================================
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+
+
+
+    searched     6 dirs
+   processed     2 files

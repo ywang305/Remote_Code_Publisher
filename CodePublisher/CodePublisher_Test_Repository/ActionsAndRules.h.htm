@@ -1,0 +1,1837 @@
+<!-------------------------------------------------------------------------
+ActionsAndRules.h
+Published:  Tue Nov 28 23:09:32 2017
+  Yaodong Wang, CSE687 - Object Oriented Design, Spring 2017
+
+	Note:
+		-Markup characters in the text part, enclosed in <pre>...< / pre> have to be
+			replaced with escape sequences, e.g., < becomes &lt; and > becomes &gt;
+		-Be careful that you don't replace genuine markup characters with escape 
+			sequences, e.g., everything outside of the <pre>...< / pre> section.
+  ----------------------------------------------------------------------------->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Code Publisher</title>
+  <link rel="stylesheet" type="text/css" href="style/site.css">
+  <script src="js/myScript.js"></script>
+</head>
+
+<body>
+
+<header>ActionsAndRules.h</header>
+
+<nav>
+  Dependencies:
+  <a href="Parser.h.htm">Parser.h</a>
+  <a href="ConfigureParser.h.htm">ConfigureParser.h</a>
+  <a href="Parser.cpp.htm">Parser.cpp</a>
+</nav>
+
+<aside>
+
+	<ul>
+		<li><a href="#" onclick="Toggle('Parser.cpp')">Parser.cpp</a>
+			<ul id="Parser.cpp" class="c0">
+				<li><a href="#" onclick="Toggle('Demo')">Demo</a>
+					<ul id="Demo" class="c1">
+					</ul>
+				</li>
+				<li><a href="#" onclick="Toggle('[])')">[])</a>
+					<ul id="[])" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('ActionsAndRules.h')">ActionsAndRules.h</a>
+			<ul id="ActionsAndRules.h" class="c0">
+				<li><a href="#" onclick="Toggle('CodeAnalysis')">CodeAnalysis</a>
+					<ul id="CodeAnalysis" class="c1">
+						<li><a href="#" onclick="Toggle('Language')">Language</a>
+						<ul id="Language" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Path')">Path</a>
+						<ul id="Path" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Repository')">Repository</a>
+						<ul id="Repository" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('~Repository')">~Repository</a>
+						<ul id="~Repository" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('language')">language</a>
+						<ul id="language" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('package')">package</a>
+						<ul id="package" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('currentPath')">currentPath</a>
+						<ul id="currentPath" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('currentAccess')">currentAccess</a>
+						<ul id="currentAccess" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('getInstance')">getInstance</a>
+						<ul id="getInstance" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('scopeStack')">scopeStack</a>
+						<ul id="scopeStack" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('AST')">AST</a>
+						<ul id="AST" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('getGlobalScope')">getGlobalScope</a>
+						<ul id="getGlobalScope" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Toker')">Toker</a>
+						<ul id="Toker" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('lineCount')">lineCount</a>
+						<ul id="lineCount" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('BeginScope')">BeginScope</a>
+						<ul id="BeginScope" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleBeginScope')">HandleBeginScope</a>
+						<ul id="HandleBeginScope" class="c2">
+							<li><a href="#">HandleBeginScope</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('EndScope')">EndScope</a>
+						<ul id="EndScope" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Dbug')">Dbug</a>
+						<ul id="Dbug" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleEndScope')">HandleEndScope</a>
+						<ul id="HandleEndScope" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('doAction')">doAction</a>
+						<ul id="doAction" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('DetectAccessSpecifier')">DetectAccessSpecifier</a>
+						<ul id="DetectAccessSpecifier" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleAccessSpecifier')">HandleAccessSpecifier</a>
+						<ul id="HandleAccessSpecifier" class="c2">
+							<li><a href="#">HandleAccessSpecifier</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('PreprocStatement')">PreprocStatement</a>
+						<ul id="PreprocStatement" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandlePreprocStatement')">HandlePreprocStatement</a>
+						<ul id="HandlePreprocStatement" class="c2">
+							<li><a href="#">HandlePreprocStatement</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('NamespaceDefinition')">NamespaceDefinition</a>
+						<ul id="NamespaceDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleNamespaceDefinition')">HandleNamespaceDefinition</a>
+						<ul id="HandleNamespaceDefinition" class="c2">
+							<li><a href="#">HandleNamespaceDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('ClassDefinition')">ClassDefinition</a>
+						<ul id="ClassDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleClassDefinition')">HandleClassDefinition</a>
+						<ul id="HandleClassDefinition" class="c2">
+							<li><a href="#">HandleClassDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('StructDefinition')">StructDefinition</a>
+						<ul id="StructDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleStructDefinition')">HandleStructDefinition</a>
+						<ul id="HandleStructDefinition" class="c2">
+							<li><a href="#">HandleStructDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('EnumDefinition')">EnumDefinition</a>
+						<ul id="EnumDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleEnumDefinition')">HandleEnumDefinition</a>
+						<ul id="HandleEnumDefinition" class="c2">
+							<li><a href="#">HandleEnumDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CppFunctionDefinition')">CppFunctionDefinition</a>
+						<ul id="CppFunctionDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCppFunctionDefinition')">HandleCppFunctionDefinition</a>
+						<ul id="HandleCppFunctionDefinition" class="c2">
+							<li><a href="#">HandleCppFunctionDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CSharpFunctionDefinition')">CSharpFunctionDefinition</a>
+						<ul id="CSharpFunctionDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCSharpFunctionDefinition')">HandleCSharpFunctionDefinition</a>
+						<ul id="HandleCSharpFunctionDefinition" class="c2">
+							<li><a href="#">HandleCSharpFunctionDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('ControlDefinition')">ControlDefinition</a>
+						<ul id="ControlDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleControlDefinition')">HandleControlDefinition</a>
+						<ul id="HandleControlDefinition" class="c2">
+							<li><a href="#">HandleControlDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Rslt')">Rslt</a>
+						<ul id="Rslt" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('PrintFunction')">PrintFunction</a>
+						<ul id="PrintFunction" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('PrettyPrintFunction')">PrettyPrintFunction</a>
+						<ul id="PrettyPrintFunction" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CppDeclaration')">CppDeclaration</a>
+						<ul id="CppDeclaration" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCppDeclaration')">HandleCppDeclaration</a>
+						<ul id="HandleCppDeclaration" class="c2">
+							<li><a href="#">HandleCppDeclaration</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CSharpDeclaration')">CSharpDeclaration</a>
+						<ul id="CSharpDeclaration" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCSharpDeclaration')">HandleCSharpDeclaration</a>
+						<ul id="HandleCSharpDeclaration" class="c2">
+							<li><a href="#">HandleCSharpDeclaration</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CppExecutable')">CppExecutable</a>
+						<ul id="CppExecutable" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCppExecutable')">HandleCppExecutable</a>
+						<ul id="HandleCppExecutable" class="c2">
+							<li><a href="#">HandleCppExecutable</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CSharpExecutable')">CSharpExecutable</a>
+						<ul id="CSharpExecutable" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCSharpExecutable')">HandleCSharpExecutable</a>
+						<ul id="HandleCSharpExecutable" class="c2">
+							<li><a href="#">HandleCSharpExecutable</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Default')">Default</a>
+						<ul id="Default" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleDefault')">HandleDefault</a>
+						<ul id="HandleDefault" class="c2">
+							<li><a href="#">HandleDefault</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Child.h')">Child.h</a>
+			<ul id="Child.h" class="c0">
+				<li><a href="#" onclick="Toggle('ChildTest')">ChildTest</a>
+					<ul id="ChildTest" class="c1">
+						<li><a href="#" onclick="Toggle('element')">element</a>
+						<ul id="element" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Numbers')">Numbers</a>
+						<ul id="Numbers" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Child')">Child</a>
+						<ul id="Child" class="c2">
+							<li><a href="#">Child</a></li>
+							<li><a href="#">~Child</a></li>
+							<li><a href="#">inlineMethod</a></li>
+							<li><a href="#">method2</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('globalFunction')">globalFunction</a>
+						<ul id="globalFunction" class="c2">
+						</ul>
+					</li>
+					</ul>
+				</li>
+				<li><a href="#" onclick="Toggle('globalFunction1')">globalFunction1</a>
+					<ul id="globalFunction1" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Child2.h')">Child2.h</a>
+			<ul id="Child2.h" class="c0">
+				<li><a href="#" onclick="Toggle('ChildTest2')">ChildTest2</a>
+					<ul id="ChildTest2" class="c1">
+						<li><a href="#" onclick="Toggle('Child')">Child</a>
+						<ul id="Child" class="c2">
+						</ul>
+					</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Child.cpp')">Child.cpp</a>
+			<ul id="Child.cpp" class="c0">
+				<li><a href="#" onclick="Toggle('method1')">method1</a>
+					<ul id="method1" class="c1">
+					</ul>
+				</li>
+				<li><a href="#" onclick="Toggle('method3')">method3</a>
+					<ul id="method3" class="c1">
+					</ul>
+				</li>
+				<li><a href="#" onclick="Toggle('method4')">method4</a>
+					<ul id="method4" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('ConfigureParser.h')">ConfigureParser.h</a>
+			<ul id="ConfigureParser.h" class="c0">
+				<li><a href="#" onclick="Toggle('CodeAnalysis')">CodeAnalysis</a>
+					<ul id="CodeAnalysis" class="c1">
+						<li><a href="#" onclick="Toggle('ConfigParseForCodeAnal')">ConfigParseForCodeAnal</a>
+						<ul id="ConfigParseForCodeAnal" class="c2">
+							<li><a href="#">ConfigParseForCodeAnal</a></li>
+						</ul>
+					</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('ConfigureParser.cpp')">ConfigureParser.cpp</a>
+			<ul id="ConfigureParser.cpp" class="c0">
+				<li><a href="#" onclick="Toggle('[])')">[])</a>
+					<ul id="[])" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Grandparent.h')">Grandparent.h</a>
+			<ul id="Grandparent.h" class="c0">
+				<li><a href="#" onclick="Toggle('GrandParent')">GrandParent</a>
+					<ul id="GrandParent" class="c1">
+						<li><a href="#" onclick="Toggle('GrandParent')">GrandParent</a>
+						<ul id="GrandParent" class="c2">
+							<li><a href="#">GrandParent</a></li>
+							<li><a href="#">~GrandParent</a></li>
+							<li><a href="#">GPmethod2</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('~GrandParent')">~GrandParent</a>
+						<ul id="~GrandParent" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('GPmethod2')">GPmethod2</a>
+						<ul id="GPmethod2" class="c2">
+						</ul>
+					</li>
+					</ul>
+				</li>
+				<li><a href="#" onclick="Toggle('globalFunction2')">globalFunction2</a>
+					<ul id="globalFunction2" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Test.cpp')">Test.cpp</a>
+			<ul id="Test.cpp" class="c0">
+				<li><a href="#" onclick="Toggle('GPmethod3')">GPmethod3</a>
+					<ul id="GPmethod3" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Parent.h')">Parent.h</a>
+			<ul id="Parent.h" class="c0">
+				<li><a href="#" onclick="Toggle('parent1')">parent1</a>
+					<ul id="parent1" class="c1">
+						<li><a href="#" onclick="Toggle('parent2')">parent2</a>
+						<ul id="parent2" class="c2">
+							<li><a href="#">Parent</a></li>
+						</ul>
+					</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Parser.h')">Parser.h</a>
+			<ul id="Parser.h" class="c0">
+				<li><a href="#" onclick="Toggle('CodeAnalysis')">CodeAnalysis</a>
+					<ul id="CodeAnalysis" class="c1">
+						<li><a href="#" onclick="Toggle('IBuilder')">IBuilder</a>
+						<ul id="IBuilder" class="c2">
+							<li><a href="#">~IBuilder</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('IAction')">IAction</a>
+						<ul id="IAction" class="c2">
+							<li><a href="#">~IAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('IRule')">IRule</a>
+						<ul id="IRule" class="c2">
+							<li><a href="#">~IRule</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Parser')">Parser</a>
+						<ul id="Parser" class="c2">
+							<li><a href="#">Parser</a></li>
+							<li><a href="#">~Parser</a></li>
+						</ul>
+					</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('ActionsAndRules.cpp')">ActionsAndRules.cpp</a>
+			<ul id="ActionsAndRules.cpp" class="c0">
+				<li><a href="#" onclick="Toggle('[])')">[])</a>
+					<ul id="[])" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+</aside>
+
+<pre>
+#ifndef ACTIONSANDRULES_H
+#define ACTIONSANDRULES_H
+/////////////////////////////////////////////////////////////////////
+//  ActionsAndRules.h - declares new parsing rules and actions     //
+//  ver 3.2                                                        //
+//  Language:      Visual C++ 2008, SP1                            //
+//  Platform:      Dell Precision T7400, Vista Ultimate SP1        //
+//  Application:   Prototype for CSE687 Pr1, Sp09                  //
+//  Author:        Jim Fawcett, CST 4-187, Syracuse University     //
+//                 (315) 443-3948, jfawcett@twcny.rr.com           //
+/////////////////////////////////////////////////////////////////////
+/*
+  Module Operations: 
+  ==================
+  This module defines several action classes.  Its classes provide 
+  specialized services needed for specific applications.  The modules
+  Parser, SemiExpression, and Tokenizer, are intended to be reusable
+  without change.  This module provides a place to put extensions of
+  these facilities and is not expected to be reusable. 
+
+  Public Interface:
+  =================
+  Toker t(someFile);              // create tokenizer instance
+  SemiExp se(&t);                 // create a SemiExp attached to tokenizer
+  Parser parser(se);              // now we have a parser
+  Rule1 r1;                       // create instance of a derived Rule class
+  Action1 a1;                     // create a derived action
+  r1.addAction(&a1);              // register action with the rule
+  parser.addRule(&r1);            // register rule with parser
+  while(se.getSemiExp())          // get semi-expression
+    parser.parse();               //   and parse it
+
+  Build Process:
+  ==============
+  Required files
+    - Parser.h, Parser.cpp, ScopeStack.h, ScopeStack.cpp,
+      ActionsAndRules.h, ActionsAndRules.cpp, ConfigureParser.cpp,
+      ItokCollection.h, SemiExpression.h, SemiExpression.cpp, tokenizer.h, tokenizer.cpp
+  Build commands (either one)
+    - devenv CodeAnalysis.sln
+    - cl /EHsc /DTEST_PARSER parser.cpp ActionsAndRules.cpp \
+         semiexpression.cpp tokenizer.cpp /link setargv.obj
+
+  Maintenance History:
+  ====================
+  ver 3.2 : 28 Aug 16
+  - fixed errors in many rules and actions based on lots of testing
+  - cleaned up text, removing comments and improving prologues
+  ver 3.1 : 23 Aug 16
+  - qualified input pointers in rules and actions as const
+  - cleaned up code by removing unreachables and commented code, and by simplifying 
+  ver 3.0 : 06 Aug 16
+  - Added use of AbstrSynTree
+  - Added new rules and actions
+  - Renamed and modified most of the other actions and rules
+  ver 2.1 : 15 Feb 16
+  - small functional change to a few of the actions changes display strategy
+  - preface the (new) Toker and SemiExp with Scanner namespace
+  ver 2.0 : 01 Jun 11
+  - added processing on way to building strong code analyzer
+  ver 1.1 : 17 Jan 09
+  - changed to accept a pointer to interfaced ITokCollection instead
+    of a SemiExpression
+  ver 1.0 : 12 Jan 06
+  - first release
+
+  Planned Changes:
+  ================
+  C++ lambda detection needs strengthening
+*/
+//
+#include &lt;queue&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+#include &lt;iomanip&gt;
+#include "Parser.h"
+#include "../GrammarHelpers/GrammarHelpers.h"
+#include "../SemiExp/itokcollection.h"
+#include "../ScopeStack/ScopeStack.h"
+#include "../Tokenizer/Tokenizer.h"
+#include "../SemiExp/SemiExp.h"
+#include "../AbstractSyntaxTree/AbstrSynTree.h"
+#include "../Logger/Logger.h"
+#include "../FileSystem/FileSystem.h"
+
+namespace CodeAnalysis
+{  
+  ///////////////////////////////////////////////////////////////////
+  // Repository instance is used to share resources
+  // among all actions.
+
+  enum Language { C /* not implemented */, Cpp, CSharp };
+
+  class Repository  // application specific
+  {
+  public:
+    using Rslt = Logging::StaticLogger&lt;0&gt;;  // use for application results
+    using Demo = Logging::StaticLogger&lt;1&gt;;  // use for demonstrations of processing
+    using Dbug = Logging::StaticLogger&lt;2&gt;;  // use for debug output
+    using Package = std::string;
+    using Path = std::string;
+
+  private:
+    Language language_ = Language::Cpp;
+    Path path_;
+    ScopeStack&lt;ASTNode*&gt; stack;
+    AbstrSynTree ast;
+    ASTNode* pGlobalScope;
+    Package package_;
+    Scanner::Toker* p_Toker;
+    Access currentAccess_ = Access::publ;
+    static Repository* instance;
+  
+  public:
+    
+    Repository(Scanner::Toker* pToker) : ast(stack)
+    {
+      p_Toker = pToker;
+      pGlobalScope = stack.top();
+      instance = this;
+    }
+
+    ~Repository()
+    {
+      Dbug::write("\n  deleting repository");
+    }
+
+    Language& language() { return language_; }
+
+    Package& package() { return package_; }
+
+    Path& currentPath() { return path_; }
+
+    Access& currentAccess() { return currentAccess_; }
+
+    static Repository* getInstance() { return instance; }
+
+    ScopeStack&lt;ASTNode*&gt;& scopeStack() { return stack; }
+
+    AbstrSynTree& AST() { return ast; }
+
+    ASTNode* getGlobalScope() { return pGlobalScope; }
+
+    Scanner::Toker* Toker() { return p_Toker; }
+
+    size_t lineCount() 
+    { 
+      return (size_t)(p_Toker-&gt;currentLineCount()); 
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect beginning of scope
+
+  class BeginScope : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Test begin scope", *pTc);
+
+      // don't parse SemiExp with single semicolon token
+
+      if (pTc-&gt;length() == 1 && (*pTc)[0] == ";")
+        return IRule::Stop;
+
+      if (pTc-&gt;find("{") &lt; pTc-&gt;length())
+      {
+        doActions(pTc);
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to handle scope stack at beginning of scope
+
+  class HandleBeginScope : public IAction
+  {
+    Repository* p_Repos;
+  public:
+    HandleBeginScope(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("handle begin scope", *pTc);
+      //if (p_Repos-&gt;scopeStack().size() == 0)
+      //  Repository::Demo::write("\n--- empty stack ---");
+
+      ASTNode* pElem = new ASTNode;
+      pElem-&gt;type_ = "anonymous";
+      pElem-&gt;name_ = "none";
+      pElem-&gt;package_ = p_Repos-&gt;package();
+      pElem-&gt;startLineCount_ = p_Repos-&gt;lineCount();
+      pElem-&gt;endLineCount_ = 1;
+      pElem-&gt;path_ = p_Repos-&gt;currentPath();
+      /*
+       * make this ASTNode child of ASTNode on stack top
+       * then push onto stack
+       */
+      p_Repos-&gt;AST().add(pElem);
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect end of scope
+
+  class EndScope : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Test end scope", *pTc);
+
+      //std::string debug = pTc-&gt;show();
+
+      if (pTc-&gt;find("}") &lt; pTc-&gt;length())
+      {
+        doActions(pTc);
+        return IRule::Stop;
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to handle scope stack at end of scope
+
+  class HandleEndScope : public IAction
+  {
+    Repository* p_Repos;
+  public:
+    using Dbug = Logging::StaticLogger&lt;2&gt;;
+
+    HandleEndScope(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle end scope", *pTc);
+
+      //if (p_Repos-&gt;scopeStack().size() == 0)
+      //{
+      //  Repository::Demo::flush();
+      //  Repository::Demo::write("\n--- empty stack ---");
+      //}
+      //ASTNode* pDebug = p_Repos-&gt;scopeStack().top();
+      //std::string debug1 = pDebug-&gt;name_;
+      //std::string debug2 = pDebug-&gt;type_;
+      //std::string debug3 = pDebug-&gt;package_;
+      //std::string debug = pElem-&gt;name_;
+
+      if (p_Repos-&gt;scopeStack().size() == 0)
+        return;
+
+      ASTNode* pElem = p_Repos-&gt;AST().pop();
+
+      pElem-&gt;endLineCount_ = p_Repos-&gt;lineCount();
+      if (pElem-&gt;type_ == "class" || pElem-&gt;type_ == "struct")
+        (pElem-&gt;endLineCount_)++;
+
+      p_Repos-&gt;currentAccess() = Access::priv;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect access for C++
+
+  class DetectAccessSpecifier : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Test access spec", *pTc);
+
+      Repository* pRepo = Repository::getInstance();
+      if (pRepo-&gt;language() != Language::Cpp)
+        return IRule::Continue;
+
+      size_t pos = pTc-&gt;find(":");
+      if (0 &lt; pos && pos &lt; pTc-&gt;length())
+      {
+        const std::string tok = (*pTc)[pos - 1];
+        if (tok == "public" || tok == "protected" || tok == "private")
+        {
+          doActions(pTc);
+          return IRule::Stop;
+        }
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to handle access specifier
+
+  class HandleAccessSpecifier : public IAction
+  {
+    Repository* p_Repos;
+
+  public:
+    HandleAccessSpecifier(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle access spec: ", *pTc);
+
+      std::string tok = (*pTc)[pTc-&gt;length() - 2];
+      Access& access = p_Repos-&gt;currentAccess();
+      if (tok == "public")
+        access = Access::publ;
+      else if (tok == "protected")
+        access = Access::prot;
+      else
+        access = Access::priv;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect preprocessor statements
+
+  class PreprocStatement : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Test preproc statement: ", *pTc);
+
+      //std::string debug = pTc-&gt;show();
+
+      if (pTc-&gt;find("#") &lt; pTc-&gt;length())
+      {
+        doActions(pTc);
+        return IRule::Stop;
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to add semiexp to scope stack top statements_
+
+  class HandlePreprocStatement : public IAction
+  {
+    Repository* p_Repos;
+
+  public:
+    HandlePreprocStatement(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle preproc statement: ", *pTc);
+
+      Scanner::ITokCollection* pClone = pTc-&gt;clone();
+      ASTNode* pElem = p_Repos-&gt;scopeStack().top();
+      pElem-&gt;statements_.push_back(pClone);
+
+      GrammarHelper::showParse("Preproc Stmt", *pTc);
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect namespace statements
+
+  class NamespaceDefinition : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Test namespace definition: ", *pTc);
+
+      const Scanner::ITokCollection& tc = *pTc;
+      if (tc[tc.length() - 1] == "{")
+      {
+        size_t len = tc.find("namespace");
+        if (len &lt; tc.length())
+        {
+          doActions(pTc);
+          return IRule::Stop;
+        }
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to add namespace info to scope stack top
+
+  class HandleNamespaceDefinition : public IAction
+  {
+    Repository* p_Repos;
+
+  public:
+    HandleNamespaceDefinition(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle namespace definition: ", *pTc);
+
+      ASTNode* top = p_Repos-&gt;scopeStack().top();
+
+      std::string name = (*pTc)[pTc-&gt;find("namespace") + 1];
+      top-&gt;type_ = "namespace";
+      top-&gt;name_ = name;
+      top-&gt;package_ = p_Repos-&gt;package();
+
+      GrammarHelper::showParse("namespace def", *pTc);
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect class statements
+
+  class ClassDefinition : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Test class definition: ", *pTc);
+
+      const Scanner::ITokCollection& tc = *pTc;
+      if (tc[tc.length() - 1] == "{")
+      {
+        size_t len = tc.find("class");
+        if (len &lt; tc.length())
+        {
+          doActions(pTc);
+          return IRule::Stop;
+        }
+        len = tc.find("interface");
+        if (len &lt; tc.length())
+        {
+          doActions(pTc);
+          return IRule::Stop;
+        }
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to add class info to scope stack top
+
+  class HandleClassDefinition : public IAction
+  {
+    Repository* p_Repos;
+
+  public:
+    HandleClassDefinition(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle class definition: ", *pTc);
+
+      p_Repos-&gt;currentAccess() = Access::priv;
+
+      ASTNode* top = p_Repos-&gt;scopeStack().top();
+      size_t typeIndex = pTc-&gt;find("class");
+      if (typeIndex &lt; pTc-&gt;length())
+      {
+        size_t nameIndex = typeIndex + 1;
+        std::string name = (*pTc)[nameIndex];
+        top-&gt;type_ = "class";
+        top-&gt;name_ = name;
+        top-&gt;package_ = p_Repos-&gt;package();
+        p_Repos-&gt;AST().typeMap()[name] = top;
+        GrammarHelper::showParse("class def", *pTc);
+      }
+      else  // C#
+      {
+        typeIndex = pTc-&gt;find("interface");
+        size_t nameIndex = typeIndex + 1;
+        std::string name = (*pTc)[nameIndex];
+        top-&gt;type_ = "interface";
+        top-&gt;name_ = name;
+        top-&gt;package_ = p_Repos-&gt;package();
+        p_Repos-&gt;AST().typeMap()[name] = top;
+        GrammarHelper::showParse("interface def", *pTc);
+      }
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect struct statements
+
+  class StructDefinition : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Test struct definition: ", *pTc);
+
+      const Scanner::ITokCollection& tc = *pTc;
+      if (tc[tc.length() - 1] == "{")
+      {
+        size_t len = tc.find("struct");
+        if (len &lt; tc.length())
+        {
+          doActions(pTc);
+          return IRule::Stop;
+        }
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to add struct info to scope stack top
+
+  class HandleStructDefinition : public IAction
+  {
+    Repository* p_Repos;
+
+  public:
+    HandleStructDefinition(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle struct definition: ", *pTc);
+
+      p_Repos-&gt;currentAccess() = Access::publ;
+
+      ASTNode* top = p_Repos-&gt;scopeStack().top();
+
+      std::string name = (*pTc)[pTc-&gt;find("struct") + 1];
+      top-&gt;type_ = "struct";
+      top-&gt;name_ = name;
+      top-&gt;package_ = p_Repos-&gt;package();
+      p_Repos-&gt;AST().typeMap()[name] = top;
+
+      GrammarHelper::showParse("struct def", *pTc);
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect enum statements
+
+  class EnumDefinition : public IRule
+  {
+  public:
+	  bool doTest(const Scanner::ITokCollection* pTc) override
+	  {
+		  GrammarHelper::showParseDemo("Test enum definition: ", *pTc);
+
+		  const Scanner::ITokCollection& tc = *pTc;
+		  if (tc[tc.length() - 1] == "{")
+		  {
+			  size_t len = tc.find("enum");
+			  if (len &lt; tc.length())
+			  {
+				  doActions(pTc);
+				  return IRule::Stop;
+			  }
+		  }
+		  return IRule::Continue;
+	  }
+  };
+  ///////////////////////////////////////////////////////////////
+  // action to add enum info to scope stack top
+  class HandleEnumDefinition : public IAction
+  {
+	  Repository* p_Repos;
+
+  public:
+	  HandleEnumDefinition(Repository* pRepos)
+	  {
+		  p_Repos = pRepos;
+	  }
+	  void doAction(const Scanner::ITokCollection* pTc) override
+	  {
+		  GrammarHelper::showParseDemo("Handle enum definition: ", *pTc);
+
+		  p_Repos-&gt;currentAccess() = Access::publ;
+
+		  ASTNode* top = p_Repos-&gt;scopeStack().top();
+
+		  std::string name = (*pTc)[pTc-&gt;find("enum") + 1];
+		  top-&gt;type_ = "enum";
+		  top-&gt;name_ = name;
+		  top-&gt;package_ = p_Repos-&gt;package();
+		  p_Repos-&gt;AST().typeMap()[name] = top;
+
+		  GrammarHelper::showParse("enum def", *pTc);
+	  }
+  };
+
+
+
+
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect C++ function definitions
+
+  class CppFunctionDefinition : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      Repository* pRepo = Repository::getInstance();
+      if (pRepo-&gt;language() != Language::Cpp)
+        return IRule::Continue;
+
+      GrammarHelper::showParseDemo("Test C++ function definition: ", *pTc);
+
+      const Scanner::ITokCollection& tc = *pTc;
+      std::string debug = pTc-&gt;show();
+
+      if (tc[tc.length() - 1] == "{")
+      {
+        if (GrammarHelper::isFunction(*pTc))
+        {
+          doActions(pTc);
+          return IRule::Stop;
+        }
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to add function info to scope stack top
+
+  class HandleCppFunctionDefinition : public IAction
+  {
+    Repository* p_Repos;
+
+  public:
+    HandleCppFunctionDefinition(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle C++ function definition: ", *pTc);
+
+      //std::string debug = pTc-&gt;show();
+
+      ASTNode* top = p_Repos-&gt;scopeStack().top();
+
+      size_t nameIndex = pTc-&gt;find("(") - 1;
+      std::string name = (*pTc)[nameIndex];
+
+      // is function a destructor?
+
+      if (nameIndex &gt; 0 && (*pTc)[nameIndex - 1] == "~")
+      {
+        --nameIndex;
+        name = "~" + name;
+      }
+
+      top-&gt;type_ = "function";
+      top-&gt;name_ = name;
+      top-&gt;package_ = p_Repos-&gt;package();
+
+      GrammarHelper::showParse("function def", *pTc);
+
+      // is function an operator?
+
+      size_t operIndex = pTc-&gt;find("operator");
+      if (operIndex &lt; pTc-&gt;length())
+      {
+        name = "operator" + (*pTc)[operIndex + 1] + (*pTc)[operIndex + 2];
+        top-&gt;name_ = name;
+        nameIndex = operIndex;
+      }
+      // is function a member of a class or struct?
+
+      if (nameIndex &gt; 1 && (*pTc)[nameIndex - 1] == "::")
+      {
+        //----&lt; start find class name &gt;--------------------
+
+        std::string className = (*pTc)[nameIndex - 2];
+
+        // is class a template?
+
+        if (className == "&gt;")
+        {
+          size_t startParam = GrammarHelper::findLast(*pTc, "&lt;");
+          if (0 &lt; startParam && startParam &lt; pTc-&gt;length())
+            className = (*pTc)[startParam - 1];
+        }
+        //----&lt; end find class name &gt;----------------------
+        /*
+        * - this function's ASTNode is at stack top
+        * - find ASTNode of function's class
+        * - unlink function ASTNode from stack top predecessor
+        * - relink function ASTNode to it's class ASTNode
+        * - leave function ASTNode on stack top as it may have child nodes
+        */
+        ASTNode* pClassNode = p_Repos-&gt;AST().find(className);
+        if (pClassNode == nullptr)
+          return;
+        ASTNode* pFunctNode = p_Repos-&gt;scopeStack().top();
+        ASTNode* pParentNode = p_Repos-&gt;scopeStack().predOfTop();
+        pParentNode-&gt;children_.pop_back();           // unlink function
+        pClassNode-&gt;children_.push_back(pFunctNode); // relink function
+        return;
+      }
+      // is this a lambda?
+
+      std::string packageName = p_Repos-&gt;package();
+      std::string ext = FileSystem::Path::getExt(packageName);
+
+      size_t posBracket = pTc-&gt;find("[");
+      size_t posBrace = pTc-&gt;find("{");
+      if (posBracket &lt; posBrace && posBrace &lt; pTc-&gt;length())
+      {
+        std::string name;
+        for (size_t i = posBracket; i &lt; posBrace; ++i)
+          name += (*pTc)[i];
+        top-&gt;name_ = name;
+        top-&gt;type_ = "lambda";
+      }
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect C# function definitions
+
+  class CSharpFunctionDefinition : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      //std::string debug = pTc-&gt;show();
+
+      Repository* pRepo = Repository::getInstance();
+      if (pRepo-&gt;language() != Language::CSharp)
+        return IRule::Continue;
+
+      GrammarHelper::showParseDemo("Test C# function definition: ", *pTc);
+
+      const Scanner::ITokCollection& tc = *pTc;
+      if (tc[tc.length() - 1] == "{")
+      {
+        Scanner::SemiExp se;
+        for (size_t i = 0; i &lt; tc.length(); ++i)
+          se.push_back(tc[i]);
+
+        if (GrammarHelper::isFunction(se))
+        {
+          std::string debug = se.show();
+          doActions(&se);
+          return IRule::Stop;
+        }
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to add function info to scope stack top
+
+  class HandleCSharpFunctionDefinition : public IAction
+  {
+    Repository* p_Repos;
+
+  public:
+    HandleCSharpFunctionDefinition(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle C# function definition: ", *pTc);
+
+      std::string debug = pTc-&gt;show();
+      ASTNode* top = p_Repos-&gt;scopeStack().top();
+
+      size_t nameIndex = pTc-&gt;find("(") - 1;
+      std::string name = (*pTc)[nameIndex];
+
+      // is function a destructor?
+
+      if (nameIndex &gt; 0 && (*pTc)[nameIndex - 1] == "~")
+      {
+        --nameIndex;
+        name = "~" + name;
+      }
+
+      top-&gt;type_ = "function";
+      top-&gt;name_ = name;
+      top-&gt;package_ = p_Repos-&gt;package();
+
+      GrammarHelper::showParse("function def", *pTc);
+
+      // is function an operator?
+
+      size_t operIndex = pTc-&gt;find("operator");
+      if (operIndex &lt; pTc-&gt;length())
+      {
+        name = "operator" + (*pTc)[operIndex + 1] + (*pTc)[operIndex + 2];
+        top-&gt;name_ = name;
+        nameIndex = operIndex;
+      }
+
+      // is lambda?
+
+      size_t posParen = pTc-&gt;find("(");
+      size_t posBrace = pTc-&gt;find("{");
+      size_t posEqual = pTc-&gt;find("=");
+      if (posParen &lt; posBrace && posBrace &lt; pTc-&gt;length())
+      {
+        if (posEqual &lt; pTc-&gt;length() - 1 && (*pTc)[posEqual + 1] == "&gt;")
+        {
+          std::string name;
+          for (size_t i = posParen; i &lt;= posBrace; ++i)
+            name += (*pTc)[i];
+          top-&gt;name_ = name;
+          top-&gt;type_ = "lambda";
+        }
+      }
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect control definitions
+
+  class ControlDefinition : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Test control definition: ", *pTc);
+
+      const Scanner::ITokCollection& tc = *pTc;
+      if (tc[tc.length() - 1] == "{")
+      {
+        size_t len = tc.find("(");
+        if (len &lt; tc.length() && GrammarHelper::isControlKeyWord(tc[len - 1]))
+        {
+          doActions(pTc);
+          return IRule::Stop;
+        }
+        else if (tc.length() &gt; 1 && GrammarHelper::isControlKeyWord(tc[tc.length() - 2]))
+        {
+          // shouldn't need this scope since all semiExps have been trimmed
+          doActions(pTc);
+          return IRule::Stop;
+        }
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to add control info to scope stack top
+
+  class HandleControlDefinition : public IAction
+  {
+    Repository* p_Repos;
+
+  public:
+    HandleControlDefinition(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle control definition: ", *pTc);
+
+      ASTNode* top = p_Repos-&gt;scopeStack().top();
+
+      size_t nameIndex = pTc-&gt;find("(") - 1;  // if, for, while, switch, catch
+      if (nameIndex == pTc-&gt;length() - 1)     // do, try - they don't have parens
+        nameIndex = pTc-&gt;length() - 2;
+      std::string name = (*pTc)[nameIndex];
+      top-&gt;type_ = "control";
+      top-&gt;name_ = name;
+
+      GrammarHelper::showParse("control def", *pTc);
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to send semi-expression that starts a function def
+  // to console
+
+  class PrintFunction : public IAction
+  {
+    Repository* p_Repos;
+  public:
+    using Rslt = Logging::StaticLogger&lt;0&gt;;
+
+    PrintFunction(Repository* pRepos)
+    {
+      p_Repos = pRepos;
+    }
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      std::ostringstream out;
+      out &lt;&lt; "\n  FuncDef: " &lt;&lt; pTc-&gt;show().c_str();
+      Rslt::write(out.str());
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to send signature of a function def to console
+
+  class PrettyPrintFunction : public IAction
+  {
+    Repository* p_Repos;
+  public:
+    using Rslt = Logging::StaticLogger&lt;0&gt;;
+
+    PrettyPrintFunction(Repository* pRepos) : p_Repos(pRepos) {}
+
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      size_t len = pTc-&gt;find(")");
+
+      std::ostringstream out;
+      out &lt;&lt; "\n\n  Pretty Stmt:    ";
+      for (size_t i = 0; i &lt; len + 1; ++i)
+        out &lt;&lt; (*pTc)[i] &lt;&lt; " ";
+      out &lt;&lt; "\n";
+      Rslt::write(out.str());
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect C++ Declaration
+  /*
+  *  - Declaration ends in semicolon
+  *  - has type, name, modifiers & initializers
+  *  So:
+  *  - strip off modifiers and initializers
+  *  - if you have two things left it's a declar, else executable
+  */
+  class CppDeclaration : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      Repository* pRepo = Repository::getInstance();
+      if (pRepo-&gt;language() != Language::Cpp)
+        return IRule::Continue;
+
+      GrammarHelper::showParseDemo("Test C++ declaration: ", *pTc);
+      std::string debug3 = pTc-&gt;show();
+
+      Scanner::SemiExp tc;
+      tc.clone(*pTc);
+
+
+      if (tc.length() &gt; 0 && tc[0] == "using" && tc[2]=="=")
+      {
+        doActions(pTc);
+        return IRule::Stop;
+      }
+
+	  if (tc.length() &gt; 0 && tc[0] == "typedef" && !tc[tc.length() - 2].empty())
+	  {
+		  doActions(pTc);
+		  return IRule::Stop;
+	  }
+
+      std::string debug = tc.show();
+      
+      if (tc[tc.length() - 1] == ";" && tc.length() &gt; 2)
+      {
+        std::string nextToLast = tc[tc.length() - 2];
+        if (nextToLast == "delete" || nextToLast == "default" || nextToLast == "const")
+        {
+          {
+            // function declaration
+            doActions(pTc);
+            return IRule::Stop;
+          }
+        }
+        std::string parentType = pRepo-&gt;scopeStack().top()-&gt;type_;
+        
+        if (GrammarHelper::isDataDeclaration(tc) || GrammarHelper::isFunctionDeclaration(tc, parentType))
+        {
+          doActions(pTc);
+          return IRule::Stop;
+        }
+
+        if (parentType != "function")
+        {
+          // can't be executable so must be declaration
+
+          doActions(pTc);
+          return IRule::Stop;
+        }
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to add declaration info to scope stack top
+
+  class HandleCppDeclaration : public IAction
+  {
+    Repository* p_Repos;
+
+  public:
+    HandleCppDeclaration(Repository* pRepos) : p_Repos(pRepos) {}
+
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle C++ declaration: ", *pTc);
+
+      // save declaration info in ASTNode
+
+      ASTNode* pCurrNode = p_Repos-&gt;scopeStack().top();
+      DeclarationNode declNode;
+      declNode.access_ = p_Repos-&gt;currentAccess();
+      declNode.pTc = pTc-&gt;clone();
+      declNode.package_ = p_Repos-&gt;package();
+      declNode.line_ = p_Repos-&gt;lineCount();
+
+      Scanner::SemiExp se;
+      se.clone(*pTc);
+      GrammarHelper::removeComments(se);
+
+      if (se[0] == "using" && se[2]=="=")
+      {
+        declNode.declType_ = DeclType::usingDecl;
+        pCurrNode-&gt;decl_.push_back(declNode);
+		pCurrNode-&gt;name_ = se[1];
+		pCurrNode-&gt;type_ = "alias";
+		pCurrNode-&gt;path_ = p_Repos-&gt;currentPath();
+		pCurrNode-&gt;package_ = declNode.package_;
+
+        GrammarHelper::showParse("using declar", *pTc);
+        return;
+      }
+
+	  if (se[0] == "typedef" && !se[se.length()-2].empty())
+	  {
+		  pCurrNode-&gt;name_ = se[se.length() - 2];
+		  pCurrNode-&gt;type_ = "typedef";
+		  pCurrNode-&gt;package_ = declNode.package_;
+		  GrammarHelper::showParse("typedef declar", *pTc);
+		  return;
+	  }
+
+      if (GrammarHelper::isDataDeclaration(se))
+      {
+        declNode.declType_ = DeclType::dataDecl;
+        pCurrNode-&gt;decl_.push_back(declNode);
+        GrammarHelper::showParse("data declar", *pTc);
+      }
+      else
+      {
+        declNode.declType_ = DeclType::functionDecl;
+        pCurrNode-&gt;decl_.push_back(declNode);
+        GrammarHelper::showParse("function declar", *pTc);
+      }
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect C# Declaration
+  /*
+  *  - Declaration ends in semicolon
+  *  - has type, name, modifiers & initializers
+  *  So:
+  *  - strip of modifiers and initializers
+  *  - if you have two things left it's a declar, else executable
+  */
+  class CSharpDeclaration : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      Repository* pRepo = Repository::getInstance();
+      if (pRepo-&gt;language() != Language::CSharp)
+        return IRule::Continue;
+
+      GrammarHelper::showParseDemo("Test C# declaration: ", *pTc);
+
+      std::string debug = pTc-&gt;show();
+      
+      Access access = pRepo-&gt;currentAccess();
+      bool isPublic = false;
+      std::string parentType = pRepo-&gt;scopeStack().top()-&gt;type_;
+
+      if (pTc-&gt;find("public") &lt; pTc-&gt;length() && parentType != "function")
+      {
+        isPublic = true;
+        pRepo-&gt;currentAccess() = Access::publ;
+      }
+
+      const Scanner::ITokCollection& tc = *pTc;
+      if (tc.length() &gt; 0 && tc[0] == "using")
+      {
+        doActions(pTc);
+        pRepo-&gt;currentAccess() = access;
+        return IRule::Stop;
+      }
+
+      Scanner::SemiExp se;
+      se.clone(*pTc);
+
+      if (GrammarHelper::isDataDeclaration(se))
+      {
+        doActions(pTc);
+        pRepo-&gt;currentAccess() = access;
+        return IRule::Stop;
+      }
+
+      if (GrammarHelper::isFunctionDeclaration(se, parentType))
+      {
+        doActions(pTc);
+        pRepo-&gt;currentAccess() = access;
+        return IRule::Stop;
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to add declaration info to scope stack top
+
+  class HandleCSharpDeclaration : public IAction
+  {
+    Repository* p_Repos;
+
+  public:
+    HandleCSharpDeclaration(Repository* pRepos) : p_Repos(pRepos) {}
+
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle C# declaration: ", *pTc);
+
+      // store declaration info in ASTNode
+
+      ASTNode* pCurrNode = p_Repos-&gt;scopeStack().top();
+      DeclarationNode declNode;
+      declNode.access_ = p_Repos-&gt;currentAccess();
+      declNode.pTc = pTc-&gt;clone();
+      declNode.package_ = p_Repos-&gt;package();
+      declNode.line_ = p_Repos-&gt;lineCount();
+
+      Scanner::SemiExp se;
+      se.clone(*pTc);
+      GrammarHelper::removeComments(se);
+
+      if (se[0] == "using")
+      {
+        declNode.declType_ = DeclType::usingDecl;
+        pCurrNode-&gt;decl_.push_back(declNode);
+
+        GrammarHelper::showParse("using declar", *pTc);
+        return;
+      }
+      //std::string debug = se.show();
+
+      std::string parentType = p_Repos-&gt;scopeStack().top()-&gt;type_;
+
+      if (GrammarHelper::isFunctionDeclaration(se, parentType))
+      {
+        std::string debug = se.show();
+        Access adebug = declNode.access_;
+        declNode.declType_ = DeclType::functionDecl;
+        pCurrNode-&gt;decl_.push_back(declNode);
+        GrammarHelper::showParse("function declar", *pTc);
+      }
+      else
+      {
+        std::string debug = se.show();
+        Access adebug = declNode.access_;
+        declNode.declType_ = DeclType::dataDecl;
+        pCurrNode-&gt;decl_.push_back(declNode);
+        GrammarHelper::showParse("data declar", *pTc);
+      }
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // rule to detect C++ Executable
+
+  class CppExecutable : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      Repository* pRepo = Repository::getInstance();
+      if (pRepo-&gt;language() != Language::Cpp)
+        return IRule::Continue;
+
+      GrammarHelper::showParseDemo("Test C++ executable: ", *pTc);
+
+      Scanner::SemiExp tc;
+      tc.clone(*pTc);
+
+      if (tc[tc.length() - 1] == ";" && tc.length() &gt; 2)
+      {
+        GrammarHelper::removeFunctionArgs(tc);
+        GrammarHelper::condenseTemplateTypes(tc);
+
+        // remove modifiers, comments, newlines, returns, and initializers
+
+        Scanner::SemiExp se;
+        for (size_t i = 0; i &lt; tc.length(); ++i)
+        {
+          if (GrammarHelper::isQualifierKeyWord(tc[i]))
+            continue;
+          if (se.isComment(tc[i]) || tc[i] == "\n" || tc[i] == "return")
+            continue;
+          if (tc[i] == "=" || tc[i] == ";")
+          {
+            se.push_back(";");
+            break;
+          }
+          else
+            se.push_back(tc[i]);
+        }
+        if (se.length() != 3)  // not a declaration
+        {
+          doActions(pTc);
+          return IRule::Stop;
+        }
+      }
+      return IRule::Continue;
+    }
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // action to display C++ executable info
+
+  class HandleCppExecutable : public IAction
+  {
+    Repository* p_Repo;
+
+  public:
+    HandleCppExecutable(Repository* pRepo) : p_Repo(pRepo) {}
+
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle C++ executable: ", *pTc);
+
+      GrammarHelper::showParse("executable", *pTc);
+    }
+  };
+  ///////////////////////////////////////////////////////////////
+  // rule to detect C# Executable
+
+  class CSharpExecutable : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      Repository* pRepo = Repository::getInstance();
+      if (pRepo-&gt;language() != Language::CSharp)
+        return IRule::Continue;
+
+      GrammarHelper::showParseDemo("Test C# executable: ", *pTc);
+
+      const Scanner::ITokCollection& in = *pTc;
+      Scanner::SemiExp tc;
+      for (size_t i = 0; i &lt; in.length(); ++i)
+        tc.push_back(in[i]);
+
+      if (tc[tc.length() - 1] == ";" && tc.length() &gt; 2)
+      {
+        GrammarHelper::removeFunctionArgs(tc);
+        GrammarHelper::condenseTemplateTypes(tc);
+
+        // remove modifiers, comments, newlines, returns, and initializers
+
+        Scanner::SemiExp se;
+        for (size_t i = 0; i &lt; tc.length(); ++i)
+        {
+          if (GrammarHelper::isQualifierKeyWord(tc[i]))
+            continue;
+          if (se.isComment(tc[i]) || tc[i] == "\n" || tc[i] == "return")
+            continue;
+          if (tc[i] == "=" || tc[i] == ";")
+          {
+            se.push_back(";");
+            break;
+          }
+          else
+            se.push_back(tc[i]);
+        }
+        if (se.length() != 3)  // not a declaration
+        {
+          doActions(pTc);
+          return IRule::Stop;
+        }
+      }
+      return IRule::Continue;
+    }
+  };
+  ///////////////////////////////////////////////////////////////
+  // action to display C# executable info
+
+  class HandleCSharpExecutable : public IAction
+  {
+    Repository* p_Repo;
+
+  public:
+    HandleCSharpExecutable(Repository* pRepo) : p_Repo(pRepo) {}
+
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle C# executable: ", *pTc);
+
+      Scanner::SemiExp se;
+      se.clone(*pTc);
+      GrammarHelper::removeComments(se);
+
+      GrammarHelper::showParse("executable", se);
+    }
+  };
+  ///////////////////////////////////////////////////////////////
+  // default rule
+  // - this is here to catch any SemiExp that didn't parse
+  // - We don't have rule for enums, so they are caugth here
+
+  class Default : public IRule
+  {
+  public:
+    bool doTest(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Test default: ", *pTc);
+
+      doActions(pTc);  // catches everything
+      return IRule::Stop;
+    }
+  };
+  ///////////////////////////////////////////////////////////////
+  // action to display default info
+
+  class HandleDefault : public IAction
+  {
+    Repository* p_Repo;
+
+  public:
+    HandleDefault(Repository* pRepo) : p_Repo(pRepo) {}
+
+    void doAction(const Scanner::ITokCollection* pTc) override
+    {
+      GrammarHelper::showParseDemo("Handle default: ", *pTc);
+      GrammarHelper::showParse("default: ", *pTc);
+    }
+  };
+}
+#endif
+
+</pre>
+
+</body>
+
+</html>

@@ -1,0 +1,615 @@
+<!-------------------------------------------------------------------------
+Parser.h
+Published:  Tue Nov 28 23:09:33 2017
+  Yaodong Wang, CSE687 - Object Oriented Design, Spring 2017
+
+	Note:
+		-Markup characters in the text part, enclosed in <pre>...< / pre> have to be
+			replaced with escape sequences, e.g., < becomes &lt; and > becomes &gt;
+		-Be careful that you don't replace genuine markup characters with escape 
+			sequences, e.g., everything outside of the <pre>...< / pre> section.
+  ----------------------------------------------------------------------------->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Code Publisher</title>
+  <link rel="stylesheet" type="text/css" href="style/site.css">
+  <script src="js/myScript.js"></script>
+</head>
+
+<body>
+
+<header>Parser.h</header>
+
+<nav>
+  Dependencies:
+  <a href="ConfigureParser.h.htm">ConfigureParser.h</a>
+  <a href="ActionsAndRules.h.htm">ActionsAndRules.h</a>
+  <a href="Parser.cpp.htm">Parser.cpp</a>
+</nav>
+
+<aside>
+
+	<ul>
+		<li><a href="#" onclick="Toggle('Parser.cpp')">Parser.cpp</a>
+			<ul id="Parser.cpp" class="c0">
+				<li><a href="#" onclick="Toggle('Demo')">Demo</a>
+					<ul id="Demo" class="c1">
+					</ul>
+				</li>
+				<li><a href="#" onclick="Toggle('[])')">[])</a>
+					<ul id="[])" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('ActionsAndRules.h')">ActionsAndRules.h</a>
+			<ul id="ActionsAndRules.h" class="c0">
+				<li><a href="#" onclick="Toggle('CodeAnalysis')">CodeAnalysis</a>
+					<ul id="CodeAnalysis" class="c1">
+						<li><a href="#" onclick="Toggle('Language')">Language</a>
+						<ul id="Language" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Path')">Path</a>
+						<ul id="Path" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Repository')">Repository</a>
+						<ul id="Repository" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('~Repository')">~Repository</a>
+						<ul id="~Repository" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('language')">language</a>
+						<ul id="language" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('package')">package</a>
+						<ul id="package" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('currentPath')">currentPath</a>
+						<ul id="currentPath" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('currentAccess')">currentAccess</a>
+						<ul id="currentAccess" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('getInstance')">getInstance</a>
+						<ul id="getInstance" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('scopeStack')">scopeStack</a>
+						<ul id="scopeStack" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('AST')">AST</a>
+						<ul id="AST" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('getGlobalScope')">getGlobalScope</a>
+						<ul id="getGlobalScope" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Toker')">Toker</a>
+						<ul id="Toker" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('lineCount')">lineCount</a>
+						<ul id="lineCount" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('BeginScope')">BeginScope</a>
+						<ul id="BeginScope" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleBeginScope')">HandleBeginScope</a>
+						<ul id="HandleBeginScope" class="c2">
+							<li><a href="#">HandleBeginScope</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('EndScope')">EndScope</a>
+						<ul id="EndScope" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Dbug')">Dbug</a>
+						<ul id="Dbug" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleEndScope')">HandleEndScope</a>
+						<ul id="HandleEndScope" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('doAction')">doAction</a>
+						<ul id="doAction" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('DetectAccessSpecifier')">DetectAccessSpecifier</a>
+						<ul id="DetectAccessSpecifier" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleAccessSpecifier')">HandleAccessSpecifier</a>
+						<ul id="HandleAccessSpecifier" class="c2">
+							<li><a href="#">HandleAccessSpecifier</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('PreprocStatement')">PreprocStatement</a>
+						<ul id="PreprocStatement" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandlePreprocStatement')">HandlePreprocStatement</a>
+						<ul id="HandlePreprocStatement" class="c2">
+							<li><a href="#">HandlePreprocStatement</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('NamespaceDefinition')">NamespaceDefinition</a>
+						<ul id="NamespaceDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleNamespaceDefinition')">HandleNamespaceDefinition</a>
+						<ul id="HandleNamespaceDefinition" class="c2">
+							<li><a href="#">HandleNamespaceDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('ClassDefinition')">ClassDefinition</a>
+						<ul id="ClassDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleClassDefinition')">HandleClassDefinition</a>
+						<ul id="HandleClassDefinition" class="c2">
+							<li><a href="#">HandleClassDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('StructDefinition')">StructDefinition</a>
+						<ul id="StructDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleStructDefinition')">HandleStructDefinition</a>
+						<ul id="HandleStructDefinition" class="c2">
+							<li><a href="#">HandleStructDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('EnumDefinition')">EnumDefinition</a>
+						<ul id="EnumDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleEnumDefinition')">HandleEnumDefinition</a>
+						<ul id="HandleEnumDefinition" class="c2">
+							<li><a href="#">HandleEnumDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CppFunctionDefinition')">CppFunctionDefinition</a>
+						<ul id="CppFunctionDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCppFunctionDefinition')">HandleCppFunctionDefinition</a>
+						<ul id="HandleCppFunctionDefinition" class="c2">
+							<li><a href="#">HandleCppFunctionDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CSharpFunctionDefinition')">CSharpFunctionDefinition</a>
+						<ul id="CSharpFunctionDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCSharpFunctionDefinition')">HandleCSharpFunctionDefinition</a>
+						<ul id="HandleCSharpFunctionDefinition" class="c2">
+							<li><a href="#">HandleCSharpFunctionDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('ControlDefinition')">ControlDefinition</a>
+						<ul id="ControlDefinition" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleControlDefinition')">HandleControlDefinition</a>
+						<ul id="HandleControlDefinition" class="c2">
+							<li><a href="#">HandleControlDefinition</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Rslt')">Rslt</a>
+						<ul id="Rslt" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('PrintFunction')">PrintFunction</a>
+						<ul id="PrintFunction" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('PrettyPrintFunction')">PrettyPrintFunction</a>
+						<ul id="PrettyPrintFunction" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CppDeclaration')">CppDeclaration</a>
+						<ul id="CppDeclaration" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCppDeclaration')">HandleCppDeclaration</a>
+						<ul id="HandleCppDeclaration" class="c2">
+							<li><a href="#">HandleCppDeclaration</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CSharpDeclaration')">CSharpDeclaration</a>
+						<ul id="CSharpDeclaration" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCSharpDeclaration')">HandleCSharpDeclaration</a>
+						<ul id="HandleCSharpDeclaration" class="c2">
+							<li><a href="#">HandleCSharpDeclaration</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CppExecutable')">CppExecutable</a>
+						<ul id="CppExecutable" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCppExecutable')">HandleCppExecutable</a>
+						<ul id="HandleCppExecutable" class="c2">
+							<li><a href="#">HandleCppExecutable</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('CSharpExecutable')">CSharpExecutable</a>
+						<ul id="CSharpExecutable" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleCSharpExecutable')">HandleCSharpExecutable</a>
+						<ul id="HandleCSharpExecutable" class="c2">
+							<li><a href="#">HandleCSharpExecutable</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Default')">Default</a>
+						<ul id="Default" class="c2">
+							<li><a href="#">doTest</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('HandleDefault')">HandleDefault</a>
+						<ul id="HandleDefault" class="c2">
+							<li><a href="#">HandleDefault</a></li>
+							<li><a href="#">doAction</a></li>
+						</ul>
+					</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Child.h')">Child.h</a>
+			<ul id="Child.h" class="c0">
+				<li><a href="#" onclick="Toggle('ChildTest')">ChildTest</a>
+					<ul id="ChildTest" class="c1">
+						<li><a href="#" onclick="Toggle('element')">element</a>
+						<ul id="element" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Numbers')">Numbers</a>
+						<ul id="Numbers" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Child')">Child</a>
+						<ul id="Child" class="c2">
+							<li><a href="#">Child</a></li>
+							<li><a href="#">~Child</a></li>
+							<li><a href="#">inlineMethod</a></li>
+							<li><a href="#">method2</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('globalFunction')">globalFunction</a>
+						<ul id="globalFunction" class="c2">
+						</ul>
+					</li>
+					</ul>
+				</li>
+				<li><a href="#" onclick="Toggle('globalFunction1')">globalFunction1</a>
+					<ul id="globalFunction1" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Child2.h')">Child2.h</a>
+			<ul id="Child2.h" class="c0">
+				<li><a href="#" onclick="Toggle('ChildTest2')">ChildTest2</a>
+					<ul id="ChildTest2" class="c1">
+						<li><a href="#" onclick="Toggle('Child')">Child</a>
+						<ul id="Child" class="c2">
+						</ul>
+					</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Child.cpp')">Child.cpp</a>
+			<ul id="Child.cpp" class="c0">
+				<li><a href="#" onclick="Toggle('method1')">method1</a>
+					<ul id="method1" class="c1">
+					</ul>
+				</li>
+				<li><a href="#" onclick="Toggle('method3')">method3</a>
+					<ul id="method3" class="c1">
+					</ul>
+				</li>
+				<li><a href="#" onclick="Toggle('method4')">method4</a>
+					<ul id="method4" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('ConfigureParser.h')">ConfigureParser.h</a>
+			<ul id="ConfigureParser.h" class="c0">
+				<li><a href="#" onclick="Toggle('CodeAnalysis')">CodeAnalysis</a>
+					<ul id="CodeAnalysis" class="c1">
+						<li><a href="#" onclick="Toggle('ConfigParseForCodeAnal')">ConfigParseForCodeAnal</a>
+						<ul id="ConfigParseForCodeAnal" class="c2">
+							<li><a href="#">ConfigParseForCodeAnal</a></li>
+						</ul>
+					</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('ConfigureParser.cpp')">ConfigureParser.cpp</a>
+			<ul id="ConfigureParser.cpp" class="c0">
+				<li><a href="#" onclick="Toggle('[])')">[])</a>
+					<ul id="[])" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Grandparent.h')">Grandparent.h</a>
+			<ul id="Grandparent.h" class="c0">
+				<li><a href="#" onclick="Toggle('GrandParent')">GrandParent</a>
+					<ul id="GrandParent" class="c1">
+						<li><a href="#" onclick="Toggle('GrandParent')">GrandParent</a>
+						<ul id="GrandParent" class="c2">
+							<li><a href="#">GrandParent</a></li>
+							<li><a href="#">~GrandParent</a></li>
+							<li><a href="#">GPmethod2</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('~GrandParent')">~GrandParent</a>
+						<ul id="~GrandParent" class="c2">
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('GPmethod2')">GPmethod2</a>
+						<ul id="GPmethod2" class="c2">
+						</ul>
+					</li>
+					</ul>
+				</li>
+				<li><a href="#" onclick="Toggle('globalFunction2')">globalFunction2</a>
+					<ul id="globalFunction2" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Test.cpp')">Test.cpp</a>
+			<ul id="Test.cpp" class="c0">
+				<li><a href="#" onclick="Toggle('GPmethod3')">GPmethod3</a>
+					<ul id="GPmethod3" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Parent.h')">Parent.h</a>
+			<ul id="Parent.h" class="c0">
+				<li><a href="#" onclick="Toggle('parent1')">parent1</a>
+					<ul id="parent1" class="c1">
+						<li><a href="#" onclick="Toggle('parent2')">parent2</a>
+						<ul id="parent2" class="c2">
+							<li><a href="#">Parent</a></li>
+						</ul>
+					</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('Parser.h')">Parser.h</a>
+			<ul id="Parser.h" class="c0">
+				<li><a href="#" onclick="Toggle('CodeAnalysis')">CodeAnalysis</a>
+					<ul id="CodeAnalysis" class="c1">
+						<li><a href="#" onclick="Toggle('IBuilder')">IBuilder</a>
+						<ul id="IBuilder" class="c2">
+							<li><a href="#">~IBuilder</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('IAction')">IAction</a>
+						<ul id="IAction" class="c2">
+							<li><a href="#">~IAction</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('IRule')">IRule</a>
+						<ul id="IRule" class="c2">
+							<li><a href="#">~IRule</a></li>
+						</ul>
+					</li>
+						<li><a href="#" onclick="Toggle('Parser')">Parser</a>
+						<ul id="Parser" class="c2">
+							<li><a href="#">Parser</a></li>
+							<li><a href="#">~Parser</a></li>
+						</ul>
+					</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li><a href="#" onclick="Toggle('ActionsAndRules.cpp')">ActionsAndRules.cpp</a>
+			<ul id="ActionsAndRules.cpp" class="c0">
+				<li><a href="#" onclick="Toggle('[])')">[])</a>
+					<ul id="[])" class="c1">
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+</aside>
+
+<pre>
+#ifndef PARSER_H
+#define PARSER_H
+/////////////////////////////////////////////////////////////////////
+//  Parser.h - Analyzes C++ and C# language constructs             //
+//  ver 1.5                                                        //
+//  Language:      Visual C++, Visual Studio 2015                  //
+//  Platform:      Dell XPS 8900, Windows 10                       //
+//  Application:   Prototype for CSE687 Pr1, Sp09, ...             //
+//  Author:        Jim Fawcett, CST 4-187, Syracuse University     //
+//                 (315) 443-3948, jfawcett@twcny.rr.com           //
+/////////////////////////////////////////////////////////////////////
+/*
+  Module Operations: 
+  ==================
+  This module defines a Parser class.  Its instances collect 
+  semi-expressions from a file for analysis.  Analysis consists of
+  applying a set of rules to the semi-expression, and for each rule
+  that matches, invokes a set of one or more actions.
+
+  Public Interface:
+  =================
+  Toker t(someFile);              // create tokenizer instance
+  SemiExp se(&t);                 // create a SemiExp attached to tokenizer
+  Parser parser(se);              // now we have a parser
+  Rule1 r1;                       // create instance of a derived Rule class
+  Action1 a1;                     // create a derived action
+  r1.addAction(&a1);              // register action with the rule
+  parser.addRule(&r1);            // register rule with parser
+  while(se.getSemiExp())          // get semi-expression
+    parser.parse();               //   and parse it
+
+  Build Process:
+  ==============
+  Required files
+    - Parser.h, Parser.cpp, SemiExpression.h, SemiExpression.cpp,
+      tokenizer.h, tokenizer.cpp,
+      ActionsAndRules.h, ActionsAndRules.cpp,
+      ConfigureParser.h, ConfigureParser.cpp
+  Build commands (either one)
+    - devenv Parser.sln
+    - cl /EHsc /DTEST_PARSER parser.cpp semiexpression.cpp tokenizer.cpp \
+         ActionsAndRules.cpp ConfigureParser.cpp /link setargv.obj
+
+  Maintenance History:
+  ====================
+  ver 1.5 : 19 Aug 16
+  - added trimming of semis in Parser::next()
+  - changed IRule interface to accept const pointer
+  - Now stops processing rules for a SemiExp if a rule returns IRule::Stop.
+    It continues by collecting another SemiExp for testing.
+  ver 1.4 : 15 Feb 16
+  - removed all folding rules code
+  - changed solution folder layout which caused changes in many of the
+    include paths
+  - small modifications to one of the derived actions
+  - now preface (new) Toker and SemiExp with Scanner namespace
+  ver 1.3 : 02 Jun 11
+  - added use of folding rules in get();
+  ver 1.2 : 17 Jan 09
+  - modified to accept pointer to interface ITokCollection instead of
+    SemiExpression
+  ver 1.1 : 17 Sep 07
+  - cosmetic modifications to comments on this page
+  ver 1.0 : 12 Jan 06
+  - first release
+
+*/
+
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include "../SemiExp/itokcollection.h"
+
+namespace CodeAnalysis
+{
+  ///////////////////////////////////////////////////////////////
+  // abstract base class for parsing actions
+  //   - when a rule succeeds, it invokes any registered action
+
+  class Parser;
+
+  class IBuilder
+  {
+  public:
+    virtual ~IBuilder() {}
+    virtual Parser* Build() = 0;
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // abstract base class for parsing actions
+  //   - when a rule succeeds, it invokes any registered action
+
+  class IAction
+  {
+  public:
+    virtual ~IAction() {}
+    virtual void doAction(const Scanner::ITokCollection* pTc) = 0;
+  };
+
+  ///////////////////////////////////////////////////////////////
+  // abstract base class for parser language construct detections
+  //   - rules are registered with the parser for use
+
+  class IRule
+  {
+  public:
+    static const bool Continue = true;
+    static const bool Stop = false;
+    virtual ~IRule() {}
+    void addAction(IAction* pAction);
+    void doActions(const Scanner::ITokCollection* pTc);
+    virtual bool doTest(const Scanner::ITokCollection* pTc) = 0;
+  protected:
+    std::vector&lt;IAction*&gt; actions;
+  };
+
+  class Parser
+  {
+  public:
+    Parser(Scanner::ITokCollection* pTokCollection);
+    ~Parser();
+    void addRule(IRule* pRule);
+    bool parse();
+    bool next();
+  private:
+    Scanner::ITokCollection* pTokColl;
+    std::vector&lt;IRule*&gt; rules;
+  };
+
+  inline Parser::Parser(Scanner::ITokCollection* pTokCollection) : pTokColl(pTokCollection) {}
+
+  inline Parser::~Parser() {}
+}
+#endif
+
+</pre>
+
+</body>
+
+</html>

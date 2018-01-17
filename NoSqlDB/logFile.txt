@@ -1,0 +1,16 @@
+
+                                             CodeAnalysis
+    ==============================================================================================
+     Sun Mar  5 00:58:15 2017
+     Path: "D:\Syracuse\cse687 OOD\pro2\DepAnal_on_CodeAnalyzer\NoSqlDB"
+     Args: *.h, *.cpp, /f, /r
+                                                                               
+                          Functions Exceeding Metric Limits and Public Data
+    ==============================================================================================
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+
+
+
+    searched    46 dirs
+   processed    29 files

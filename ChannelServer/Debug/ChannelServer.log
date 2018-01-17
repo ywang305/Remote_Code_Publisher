@@ -1,0 +1,10 @@
+﻿  Server.cpp
+  Utilities.cpp
+  Sockets.cpp
+  Logger.cpp
+  HttpMessage.cpp
+  FileSystem.cpp
+  Cpp11-BlockingQueue.cpp
+  Generating Code...
+Cpp11-BlockingQueue.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+  ChannelServer.vcxproj -> D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\Debug\ChannelServer.lib

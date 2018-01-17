@@ -1,0 +1,18 @@
+
+                                            CodePublisher
+    ==============================================================================================
+     Mon Apr  3 07:39:49 2017
+     Path: "D:\Syracuse\cse687 OOD\pro3\DepAnal_CodePublisher\Parser"
+     Args: *.h, *.cpp, /f, /r
+                                                                               
+                          Functions Exceeding Metric Limits and Public Data
+    ==============================================================================================
+                 file name        type                               name    line    size    cplx
+    -----------------------  ----------  ---------------------------------  ------  ------  ------
+         ActionsAndRules.h    function                           doAction     590      82       6
+       ConfigureParser.cpp    function                              Build      89      72       3
+
+
+
+    searched     3 dirs
+   processed     6 files

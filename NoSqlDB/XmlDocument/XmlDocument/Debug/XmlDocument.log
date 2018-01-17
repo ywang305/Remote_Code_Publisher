@@ -1,0 +1,7 @@
+﻿  XmlParser.cpp
+  XmlElement.cpp
+  xmlElementParts.cpp
+  Tokenizer.cpp
+  Generating Code...
+  XmlDocument.cpp
+  XmlDocument.vcxproj -> D:\Syracuse\cse687 OOD\pro4\debug works well, but not perfect at runbat\Remote_CodePublisher\Debug\XmlDocument.lib

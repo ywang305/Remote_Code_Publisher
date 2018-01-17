@@ -1,0 +1,32 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly CLIShim, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class Message: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Properties:
+    System.String filename 'get set' : 
+    System.String msgBody 'get set' : 
+    System.String command 'get set' : 
+  Methods:
+    get_command(): PrivateScope, Public, HideBySig, SpecialName
+    set_command(String): PrivateScope, Public, HideBySig, SpecialName
+    get_msgBody(): PrivateScope, Public, HideBySig, SpecialName
+    set_msgBody(String): PrivateScope, Public, HideBySig, SpecialName
+    get_filename(): PrivateScope, Public, HideBySig, SpecialName
+    set_filename(String): PrivateScope, Public, HideBySig, SpecialName
+Class Shim: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(System.String, UInt32, System.String, System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    updateMyClientDir(String): PrivateScope, Public, HideBySig
+    handDownPostMessage(String, String): PrivateScope, Public, HideBySig
+    handDownPostFileMessage(String, String): PrivateScope, Public, HideBySig
+    handDownGetFileMessage(String, String): PrivateScope, Public, HideBySig
+    handUpFileMessage(): PrivateScope, Public, HideBySig
+    exeClientXmt(): PrivateScope, Public, HideBySig
+    exeServerLsnAndRcv(Object): PrivateScope, Public, HideBySig
+    stdStrToSysStr(basic_string<char\,std::char_traits<char>\,std::allocator<char> >* IsImplicitlyDereferenced): PrivateScope, Public, HideBySig
+    sysStrToStdStr(basic_string<char\,std::char_traits<char>\,std::allocator<char> >*, String): PrivateScope, Public, HideBySig

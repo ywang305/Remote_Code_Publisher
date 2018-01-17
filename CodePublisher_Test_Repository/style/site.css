@@ -1,0 +1,103 @@
+/*////////////////////////////////////////////////////////////////////////////
+// site.css -  describing htm view                                         //
+// ver 1.0                                                                 //
+// ----------------------------------------------------------------------- //
+// copyright  Yaodong Wang, 2017                                           //
+// All rights granted provided that this notice is retained                //
+// ----------------------------------------------------------------------- //
+// Language:    Visual C++, Visual Studio 2015                             //
+// Platform:    HP-Q5F5, Core i3, Windows 10                               //
+// Application: Project #3, CSE687 - Object Oriented Design, S2015         //
+// Author:      Yaodong Wang , Syracuse University                         //
+//              ywang305@syr.edu                                           //
+///////////////////////////////////////////////////////////////////////////*/
+
+body { 
+    font-weight:600; 
+    font-size:105%;
+    background-color:	#F0F0F0;
+}
+  
+header {
+    top: 0px;
+    color: #004E89;
+    font-size: 130%;
+    font-family: 'Yantramanav', sans-serif;
+    border: 2px solid white;
+    background-color:#eee;
+    text-align: center;
+    padding: 20px;
+    float: right;
+    width: 69%;
+    box-sizing: border-box;
+}
+  
+nav {
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 4px solid white; 
+    font-size: 110%;
+    font-family:Consolas; 
+    color: #e60000;
+    background-color:#ffff99;
+    padding: 14px 16px;
+    width: 69%;
+    float: right;
+    box-sizing: border-box;
+}
+
+nav a {
+    border-left:1px solid white;
+    display: inline;
+    color: darkblue;
+    text-align: center;
+    padding: inherit;
+}
+
+a:hover {
+    border-radius: 5px;
+    color: white;
+    background-color: #4CAF50;
+}
+
+pre {
+    padding: 14px 16px;
+    border: 2px solid white;
+    margin-top: 2px;
+    float: right;
+    right: 0;
+    background-color: #fffff0;
+    overflow-x: visible;
+    width:69%;
+    box-sizing: border-box;
+}
+
+aside {
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+    left : 0;
+    top : 0;
+    color: darkblue;
+    background-color: ivory;
+    overflow: scroll;
+    position:fixed;
+    height: 95vh;
+    width: 30%;
+    box-sizing: border-box;
+}
+
+aside ul li ul li
+{
+    margin-bottom:0;
+}
+aside ul li {
+    margin-bottom: 20px;
+}
+aside a {
+    font-weight:500;
+    font-size: 105%;
+    color: darkblue;
+}
+
+
